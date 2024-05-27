@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<head>
+    <style>
+        .box {
+            background-color: purple;
+            height: 200px;
+            width: 200px;
+        }
+        .box.two {
+            background-color: red;
+            height: 200px;
+            width: 200px;
+        }
+        .box.three {
+            background-color: blue;
+            height: 200px;
+            width: 200px;
+        }
+
+        [v-cloak]{
+            display: none;
+        }
+    </style>
+    <title>Vue Example</title>
+</head>
+<body>
+    <div id="app" v-cloak> <!-- This is the Vue app container -->  <!-- v-cloak is used to to prevent everything from displaying before vues execution-->
+
+        {{ greeting }}
+
+        <input @keyup.enter="print( message + '!!!')" v-model="message"/> <!-- keyup triggered when key pressed-->
+
+
+        <button v-on:click='toggleBox'>Toggle Box</button>   <!-- v-on is used as trigger -->
+
+        <!-- <button @click='isVisible = !isVisible'>Show Box</button>   -->    <!-- can be represented as this -->
+
+
+        <div v-if="isVisible" class="box"></div>    <!-- if condition -->
+        <div v-else-if="isVisible2" class="box two"></div>    <!-- else if condition -->
+        <div v-else class="box three"></div>    <!-- else if condition -->
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> <!-- Load Vue.js -->
+    <script>
+        const app = Vue.createApp({
+            data: function() {
+                return {
+                    greeting: 'Hello, Vue!',
+                    isVisible: false,
+                    isVisible2: false,
+                    message: ''
+                }
+            },
+            methods:{
+                    //  create custom methods 
+                    toggleBox() {
+                        this.isVisible = !this.isVisible
+                    },
+                    print(message){
+                        console.log(message)
+                    }
+
+            }
+        })
+
+        app.mount('#app')     
+    </script>
+</body>
+</html>
